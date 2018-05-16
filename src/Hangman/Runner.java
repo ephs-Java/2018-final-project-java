@@ -9,6 +9,7 @@ public class Runner {
 		Hangman h = new Hangman();
 		System.out.println(h.getWord());
 		
+		
 	}
 
 }
