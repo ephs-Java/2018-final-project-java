@@ -12,6 +12,7 @@ public class Dictionary {
 	
 	public Dictionary() throws FileNotFoundException{
 		
+		@SuppressWarnings("resource")
 		Scanner f = new Scanner(new File(filename));
 		words = new ArrayList<String>();
 		while (f.hasNextLine()) {
