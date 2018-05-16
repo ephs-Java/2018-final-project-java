@@ -1,10 +1,4 @@
 # final-dix-sept-erledigt
-2017 Final Team Project
+We will create the Hangman game with a complementary GUI using Swing.
 
-Check the wiki for details and team pages.
-
-=======
-
-
-
->>>>>>> branch 'master' of https://github.com/ephs-Java/2018-final-project-java.git
+Gloria, Nathaniel, Rohit, Charles
