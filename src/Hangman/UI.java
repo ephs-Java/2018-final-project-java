@@ -24,6 +24,7 @@ public class UI extends JFrame {
 	private JButton btnNewButton;
 	private JPanel panel;
 	private JPanel panel_1;
+	private JLabel lblNewLabel;
 
 	/**
 	 * Launch the application.
@@ -84,6 +85,9 @@ public class UI extends JFrame {
 		panel_1 = new JPanel();
 		panel_1.setBounds(0, 0, 450, 278);
 		contentPane.add(panel_1);
+		
+		lblNewLabel = new JLabel("New label");
+		panel_1.add(lblNewLabel);
 	}
 
 	public void actions() {
