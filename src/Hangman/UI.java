@@ -21,8 +21,9 @@ public class UI extends JFrame {
 	private JButton bStart;
 	private JButton bQuit;
 	private JLabel lTitle;
-	private JPanel rulesPane;
 	private JButton btnNewButton;
+	private JPanel panel;
+	private JPanel panel_1;
 
 	/**
 	 * Launch the application.
@@ -54,26 +55,35 @@ public class UI extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
-		rulesPane = new JPanel();
+		
+		
 		contentPane.setBorder(null);
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
+		panel = new JPanel();
+		panel.setBounds(0, 0, 450, 278);
+		contentPane.add(panel);
+		panel.setLayout(null);
 		lTitle = new JLabel("Hangman\n");
+		lTitle.setBounds(79, 6, 296, 71);
+		panel.add(lTitle);
 		lTitle.setHorizontalAlignment(SwingConstants.CENTER);
-		lTitle.setBounds(0, 6, 444, 117);
 		lTitle.setFont(new Font("Lucida Grande", Font.PLAIN, 60));
-		contentPane.add(lTitle);
 		bStart = new JButton("Start");
-		bStart.setBounds(58, 135, 150, 79);
-		contentPane.add(bStart);
+		bStart.setBounds(173, 80, 75, 29);
+		panel.add(bStart);
 		bQuit = new JButton("Quit");
-		bQuit.setBounds(360, 0, 84, 35);
-		contentPane.add(bQuit);
+		bQuit.setBounds(173, 148, 75, 29);
+		panel.add(bQuit);
 		
 		btnNewButton = new JButton("Rules");
+		btnNewButton.setBounds(170, 115, 78, 29);
+		panel.add(btnNewButton);
 		
-		btnNewButton.setBounds(234, 135, 150, 79);
-		contentPane.add(btnNewButton);
+		panel_1 = new JPanel();
+		panel_1.setBounds(0, 0, 450, 278);
+		contentPane.add(panel_1);
 	}
 
 	public void actions() {
@@ -84,10 +94,13 @@ public class UI extends JFrame {
 		});
 		bStart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+		
 			}
 		});
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				panel.setVisible(false);
+				panel_1.setVisible(true);
 			}
 		});
 		
