@@ -21,6 +21,8 @@ public class UI extends JFrame {
 	private JButton bStart;
 	private JButton bQuit;
 	private JLabel lTitle;
+	private JPanel rulesPane;
+	private JButton btnNewButton;
 
 	/**
 	 * Launch the application.
@@ -52,20 +54,26 @@ public class UI extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
+		rulesPane = new JPanel();
 		contentPane.setBorder(null);
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		lTitle = new JLabel("Hangman\n");
 		lTitle.setHorizontalAlignment(SwingConstants.CENTER);
-		lTitle.setBounds(6, 12, 444, 117);
+		lTitle.setBounds(0, 6, 444, 117);
 		lTitle.setFont(new Font("Lucida Grande", Font.PLAIN, 60));
 		contentPane.add(lTitle);
 		bStart = new JButton("Start");
 		bStart.setBounds(58, 135, 150, 79);
 		contentPane.add(bStart);
 		bQuit = new JButton("Quit");
-		bQuit.setBounds(241, 135, 150, 79);
+		bQuit.setBounds(360, 0, 84, 35);
 		contentPane.add(bQuit);
+		
+		btnNewButton = new JButton("Rules");
+		
+		btnNewButton.setBounds(234, 135, 150, 79);
+		contentPane.add(btnNewButton);
 	}
 
 	public void actions() {
@@ -75,6 +83,10 @@ public class UI extends JFrame {
 			}
 		});
 		bStart.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
