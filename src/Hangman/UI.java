@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import javax.swing.SwingConstants;
+import javax.swing.JScrollPane;
 
 public class UI extends JFrame {
 	/**
@@ -24,7 +25,7 @@ public class UI extends JFrame {
 	private JButton btnNewButton;
 	private JPanel panel;
 	private JPanel panel_1;
-	private JLabel lblNewLabel;
+	private JButton btnBack;
 
 	/**
 	 * Launch the application.
@@ -62,12 +63,30 @@ public class UI extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		panel_1 = new JPanel();
+		panel_1.setBounds(0, 0, 450, 278);
+		contentPane.add(panel_1);
+		panel_1.setLayout(null);
+		
+		btnBack = new JButton("Back");
+		
+		btnBack.setBounds(174, 157, 117, 29);
+		panel_1.add(btnBack);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(44, 22, 357, 138);
+		panel_1.add(scrollPane);
+		
+		JLabel lblNewLabel = new JLabel("The word to guess is represented by a row of dashes, representing each letter of the word. If the guessing player suggests a letter which occurs in the word, the other player writes it in all its correct positions. If the suggested letter or number does not occur in the word, the other player draws one element of a hanged man stick figure as a tally mark.\nThe player guessing the word may, at any time, attempt to guess the whole word. If the word is correct, the game is over and the guesser wins. Otherwise, the other player may choose to penalize the guesser by adding an element to the diagram. On the other hand, if the other player makes enough incorrect guesses to allow his opponent to complete the diagram, the game is also over, this time with the guesser losing. However, the guesser can also win by guessing all the letters or numbers that appears in the word, thereby completing the word, before the diagram is completed.\n");
+		lblNewLabel.setVerticalAlignment(SwingConstants.TOP);
+		scrollPane.setViewportView(lblNewLabel);
+		
 		panel = new JPanel();
 		panel.setBounds(0, 0, 450, 278);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		lTitle = new JLabel("Hangman\n");
-		lTitle.setBounds(79, 6, 296, 71);
+		lTitle.setBounds(73, 6, 296, 71);
 		panel.add(lTitle);
 		lTitle.setHorizontalAlignment(SwingConstants.CENTER);
 		lTitle.setFont(new Font("Lucida Grande", Font.PLAIN, 60));
@@ -81,13 +100,6 @@ public class UI extends JFrame {
 		btnNewButton = new JButton("Rules");
 		btnNewButton.setBounds(170, 115, 78, 29);
 		panel.add(btnNewButton);
-		
-		panel_1 = new JPanel();
-		panel_1.setBounds(0, 0, 450, 278);
-		contentPane.add(panel_1);
-		
-		lblNewLabel = new JLabel("New label");
-		panel_1.add(lblNewLabel);
 	}
 
 	public void actions() {
@@ -105,6 +117,12 @@ public class UI extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				panel.setVisible(false);
 				panel_1.setVisible(true);
+			}
+		});
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				panel.setVisible(true);
+				panel_1.setVisible(false);
 			}
 		});
 		
