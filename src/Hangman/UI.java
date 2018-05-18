@@ -69,98 +69,97 @@ public class UI extends JFrame {
 	 * Create the frame.
 	 */
 	public UI() {
-		setIconImage(Toolkit.getDefaultToolkit()
-				.getImage("/Users/90303054/git/2018-final-project-java/img/15 - ZfSFtqk.png"));
-
+		
 		initContainers();
 		actions();
-		makeButtons();
+		
 	}
 
 	private void makeButtons() {
 		// TODO Auto-generated method stub
 		int j = 65;
-			
-		for(int i = 0; i< buttons.length; i++){
+
+		for (int i = 0; i < buttons.length; i++) {
 			char c = (char) j;
-			String letter = "" + c ;
-			
-			buttons[i]= new JButton(letter);
+			String letter = "" + c;
+
+			buttons[i] = new JButton(letter);
 			bpanel.add(buttons[i]);
 			j++;
 		}
 		bpanel.setVisible(true);
-		
+
 	}
 
 	public void initContainers() {
 		buttons = new JButton[26];
-		bpanel = new JPanel();
-		h = new Hangman();
 		setTitle("Hangman");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 900, 600);
+		
 		contentPane = new JPanel();
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-				
-						pRules = new JPanel();
-						pRules.setEnabled(false);
-						pRules.setBounds(0, 0, 900, 600);
-						contentPane.add(pRules);
-						pRules.setLayout(null);
-						
-								btnBack = new JButton("Back");
-								
-										btnBack.setBounds(349, 248, 190, 91);
-										pRules.add(btnBack);
-										
-												JScrollPane scrollPane = new JScrollPane();
-												scrollPane.setBounds(6, 6, 888, 226);
-												pRules.add(scrollPane);
-												
-														JTextPane txtpnTheWordTo = new JTextPane();
-														txtpnTheWordTo.setEditable(false);
-														txtpnTheWordTo.setText(
-																"The word to guess is represented by a row of dashes, representing each letter of the word. If the guessing player suggests a letter which occurs in the word, the other player writes it in all its correct positions. If the suggested letter or number does not occur in the word, the other player draws one element of a hanged man stick figure as a tally mark.\nThe player guessing the word may, at any time, attempt to guess the whole word. If the word is correct, the game is over and the guesser wins. Otherwise, the other player may choose to penalize the guesser by adding an element to the diagram. On the other hand, if the other player makes enough incorrect guesses to allow his opponent to complete the diagram, the game is also over, this time with the guesser losing. However, the guesser can also win by guessing all the letters or numbers that appears in the word, thereby completing the word, before the diagram is completed.\n");
-														scrollPane.setViewportView(txtpnTheWordTo);
-														pRules.setVisible(false);
-		
-				pStart = new JPanel();
-				pStart.setBounds(0, 0, 900, 600);
-				contentPane.add(pStart);
-				pStart.setLayout(null);
-				lTitle = new JLabel("Hangman\n");
-				lTitle.setBounds(175, 6, 565, 155);
-				pStart.add(lTitle);
-				lTitle.setHorizontalAlignment(SwingConstants.CENTER);
-				lTitle.setFont(new Font("Lucida Grande", Font.PLAIN, 90));
-				bStart = new JButton("Start");
-				bStart.setBounds(300, 147, 300, 100);
-				pStart.add(bStart);
-				bQuit = new JButton("Quit");
-				bQuit.setBounds(300, 403, 300, 100);
-				pStart.add(bQuit);
-				
-						btnNewButton = new JButton("Rules");
-						btnNewButton.setBounds(300, 280, 300, 100);
-						pStart.add(btnNewButton);
-
+		/*
+		 * Creates the start JPanel and adds components.
+		 */
+		pStart = new JPanel();
+		pStart.setBounds(0, 0, 900, 600);
+		contentPane.add(pStart);
+		pStart.setLayout(null);
+		bStart = new JButton("Start");
+		bStart.setBounds(300, 147, 300, 100);
+		pStart.add(bStart);
+		lTitle = new JLabel("Hangman\n");
+		lTitle.setBounds(175, 6, 565, 155);
+		pStart.add(lTitle);
+		lTitle.setHorizontalAlignment(SwingConstants.CENTER);
+		lTitle.setFont(new Font("Lucida Grande", Font.PLAIN, 90));
+		bQuit = new JButton("Quit");
+		bQuit.setBounds(300, 403, 300, 100);
+		pStart.add(bQuit);
+		btnNewButton = new JButton("Rules");
+		btnNewButton.setBounds(300, 280, 300, 100);
+		pStart.add(btnNewButton);
+		/*
+		 * Creates JPanel rules and creates buttons and text box.
+		 */
+		pRules = new JPanel();
+		pRules.setBounds(0, 0, 900, 600);
+		contentPane.add(pRules);
+		pRules.setLayout(null);
+		btnBack = new JButton("Back");
+		btnBack.setBounds(349, 248, 190, 91);
+		pRules.add(btnBack);
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(6, 6, 888, 226);
+		pRules.add(scrollPane);
+		JTextPane txtpnTheWordTo = new JTextPane();
+		txtpnTheWordTo.setEditable(false);
+		txtpnTheWordTo.setText(
+				"The word to guess is represented by a row of dashes, representing each letter of the word. If the guessing player suggests a letter which occurs in the word, the other player writes it in all its correct positions. If the suggested letter or number does not occur in the word, the other player draws one element of a hanged man stick figure as a tally mark.\nThe player guessing the word may, at any time, attempt to guess the whole word. If the word is correct, the game is over and the guesser wins. Otherwise, the other player may choose to penalize the guesser by adding an element to the diagram. On the other hand, if the other player makes enough incorrect guesses to allow his opponent to complete the diagram, the game is also over, this time with the guesser losing. However, the guesser can also win by guessing all the letters or numbers that appears in the word, thereby completing the word, before the diagram is completed.\n");
+		scrollPane.setViewportView(txtpnTheWordTo);
+		pRules.setVisible(false);
+		/*
+		 * Creates the JPanel pGame and adds components.
+		 */
 		pGame = new JPanel();
 		pGame.setEnabled(false);
 		pGame.setBounds(0, 0, 900, 600);
 		contentPane.add(pGame);
 		pGame.setLayout(null);
-		
 		bBack = new JButton("Back");
 		bBack.setBounds(721, 510, 173, 61);
 		pGame.add(bBack);
-		
+		pGame.setVisible(false);
+		/*
+		 * Creates JPanel bpanel and calls makeButtons for the button array.
+		 */
 		bpanel = new JPanel();
 		bpanel.setBounds(6, 17, 589, 270);
 		pGame.add(bpanel);
+		makeButtons();
 
-		pGame.setVisible(false);
 	}
 
 	public void actions() {
@@ -173,11 +172,7 @@ public class UI extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				pGame.setVisible(true);
 				pStart.setVisible(false);
-				Hangman r = new Hangman();
-				r.newWord();
-				r.getWord();
-				
-
+				Hangman h = new Hangman();
 			}
 		});
 		btnNewButton.addActionListener(new ActionListener() {
@@ -200,7 +195,6 @@ public class UI extends JFrame {
 				pGame.setVisible(false);
 			}
 		});
-		
 
 	}
 }
