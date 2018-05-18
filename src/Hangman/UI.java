@@ -1,6 +1,7 @@
 package Hangman;
 
 import java.awt.EventQueue;
+import java.awt.FlowLayout;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -42,9 +43,10 @@ public class UI extends JFrame {
 	private JButton btnBack;
 	private JPanel pGame;
 	private JLabel lblNewLabel;
-	private JButton btnNewButton_1;
 	private Hangman h;
-	private JLabel lblNewLabel_1;
+	private JButton[] buttons;
+	private JButton bBack;
+	private JPanel bpanel;
 
 	/**
 	 * Launch the application.
@@ -72,36 +74,54 @@ public class UI extends JFrame {
 
 		initContainers();
 		actions();
+		makeButtons();
+	}
+
+	private void makeButtons() {
+		// TODO Auto-generated method stub
+		int j = 65;
+		
+		for(int i = 0; i< buttons.length; i++){
+			char c = (char) j;
+			String letter = "" + c ;
+			
+			buttons[i]= new JButton(letter);
+			bpanel.add(buttons[i]);
+			j++;
+		}
+		bpanel.setVisible(true);
+		
 	}
 
 	public void initContainers() {
+		buttons = new JButton[26];
+		bpanel = new JPanel();
 		h = new Hangman();
 		setTitle("Hangman");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 900, 600);
 		contentPane = new JPanel();
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
 		pGame = new JPanel();
 		pGame.setEnabled(false);
-		pGame.setBounds(0, 0, 450, 278);
+		pGame.setBounds(0, 0, 900, 556);
 		contentPane.add(pGame);
 		pGame.setLayout(null);
-
-		btnNewButton_1 = new JButton("Make word");
-
-		btnNewButton_1.setBounds(151, 176, 117, 29);
-		pGame.add(btnNewButton_1);
-
-		lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setBounds(165, 77, 202, 16);
-		pGame.add(lblNewLabel_1);
+		
+		bBack = new JButton("Back");
+		bBack.setBounds(309, 243, 117, 29);
+		pGame.add(bBack);
+		
+		bpanel = new JPanel();
+		bpanel.setBounds(28, 42, 900, 556);
+		pGame.add(bpanel);
 
 		pGame.setVisible(false);
 
 		pStart = new JPanel();
-		pStart.setBounds(0, 0, 450, 278);
+		pStart.setBounds(0, 0, 900, 556);
 		contentPane.add(pStart);
 		pStart.setLayout(null);
 		lTitle = new JLabel("Hangman\n");
@@ -122,7 +142,7 @@ public class UI extends JFrame {
 
 		pRules = new JPanel();
 		pRules.setEnabled(false);
-		pRules.setBounds(0, 0, 450, 278);
+		pRules.setBounds(0, 0, 900, 556);
 		contentPane.add(pRules);
 		pRules.setLayout(null);
 
@@ -153,6 +173,10 @@ public class UI extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				pGame.setVisible(true);
 				pStart.setVisible(false);
+				Hangman r = new Hangman();
+				r.newWord();
+				r.getWord();
+				
 
 			}
 		});
@@ -168,13 +192,15 @@ public class UI extends JFrame {
 				pRules.setVisible(false);
 			}
 		});
-		btnNewButton_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
 
-				h.newWord();
-				lblNewLabel_1.setText(h.getWord());
+		bBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				pStart.setVisible(true);
+				pRules.setVisible(false);
+				pGame.setVisible(false);
 			}
 		});
+		
 
 	}
 }
