@@ -1,15 +1,11 @@
 package Hangman;
 
-import java.io.FileNotFoundException;
-import java.util.Scanner;
-
 public class Hangman {
 	private String name;
 	private int score;
 	private String word;
 	private String progress;
 	private int misses;
-	private Scanner k = new Scanner(System.in);
 	private Dictionary d;
 
 	public Hangman(){
