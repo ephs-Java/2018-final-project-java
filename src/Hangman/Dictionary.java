@@ -10,16 +10,23 @@ public class Dictionary {
 	private String filename = "words.txt";
 	private ArrayList<String> words;
 	
-	public Dictionary() throws FileNotFoundException{
+	public Dictionary(){
 		
 		@SuppressWarnings("resource")
-		Scanner f = new Scanner(new File(filename));
-		words = new ArrayList<String>();
-		while (f.hasNextLine()) {
-			
-				words.add(f.nextLine());
+		Scanner f;
+		try {
+			f = new Scanner(new File(filename));
+			words = new ArrayList<String>();
+			while (f.hasNextLine()) {
 				
-			}
+					words.add(f.nextLine());
+					
+				}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 			
 		
 		

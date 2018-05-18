@@ -12,7 +12,7 @@ public class Hangman {
 	private Scanner k = new Scanner(System.in);
 	private Dictionary d;
 
-	public Hangman() throws FileNotFoundException {
+	public Hangman(){
 
 		this.misses = 0;
 		this.progress = "";
@@ -20,7 +20,7 @@ public class Hangman {
 
 	}
 
-	public void newWord() throws FileNotFoundException {
+	public void newWord(){
 		// makes a dictionary and creates the censored word
 		this.d = new Dictionary();
 		this.word = this.d.getWord();
