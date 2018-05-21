@@ -103,6 +103,26 @@ public class UI extends JFrame {
 		/*
 		 * Creates the start JPanel and adds components.
 		 */
+		pGame = new JPanel();
+		pGame.setEnabled(false);
+		pGame.setBounds(0, 0, 900, 600);
+		contentPane.add(pGame);
+		pGame.setLayout(null);
+		
+		
+		bpanel = new JPanel();
+		bpanel.setBounds(100, 416, 703, 270);
+		pGame.add(bpanel);
+		bBack = new JButton("Back");
+		bBack.setBounds(710, 37, 173, 61);
+		pGame.add(bBack);
+		pGame.setVisible(false);
+		
+		JLabel hangingImage = new JLabel(new ImageIcon("img/-1.png"));
+		hangingImage.setBounds(100, 37, 687, 315);
+		pGame.add(hangingImage);
+	
+		
 		pStart = new JPanel();
 		pStart.setBounds(0, 0, 900, 600);
 		contentPane.add(pStart);
@@ -135,6 +155,7 @@ public class UI extends JFrame {
 		scrollPane.setBounds(6, 6, 888, 226);
 		pRules.add(scrollPane);
 		JTextPane txtpnTheWordTo = new JTextPane();
+		txtpnTheWordTo.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
 		txtpnTheWordTo.setEditable(false);
 		txtpnTheWordTo.setText(
 				"The word to guess is represented by a row of dashes, representing each letter of the word. If the guessing player suggests a letter which occurs in the word, the other player writes it in all its correct positions. If the suggested letter or number does not occur in the word, the other player draws one element of a hanged man stick figure as a tally mark.\nThe player guessing the word may, at any time, attempt to guess the whole word. If the word is correct, the game is over and the guesser wins. Otherwise, the other player may choose to penalize the guesser by adding an element to the diagram. On the other hand, if the other player makes enough incorrect guesses to allow his opponent to complete the diagram, the game is also over, this time with the guesser losing. However, the guesser can also win by guessing all the letters or numbers that appears in the word, thereby completing the word, before the diagram is completed.\n");
@@ -143,21 +164,9 @@ public class UI extends JFrame {
 		/*
 		 * Creates the JPanel pGame and adds components.
 		 */
-		pGame = new JPanel();
-		pGame.setEnabled(false);
-		pGame.setBounds(0, 0, 900, 600);
-		contentPane.add(pGame);
-		pGame.setLayout(null);
-		bBack = new JButton("Back");
-		bBack.setBounds(721, 510, 173, 61);
-		pGame.add(bBack);
-		pGame.setVisible(false);
 		/*
 		 * Creates JPanel bpanel and calls makeButtons for the button array.
 		 */
-		bpanel = new JPanel();
-		bpanel.setBounds(6, 17, 589, 270);
-		pGame.add(bpanel);
 		makeButtons();
 
 	}
