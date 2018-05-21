@@ -1,5 +1,7 @@
 package Hangman;
 
+import javax.swing.ImageIcon;
+
 public class Hangman {
 	private String name;
 	private int score;
@@ -7,12 +9,16 @@ public class Hangman {
 	private String progress;
 	private int misses;
 	private Dictionary d;
-
+	private ImageIcon[] images;
 	public Hangman(){
 
 		this.misses = 0;
 		this.progress = "";
 		this.newWord();
+		this.images = new ImageIcon[8];
+		for(int i = 0; i< images.length; i++){
+			images[i] = new ImageIcon("img/" + i + ".png");
+		}
 
 	}
 
