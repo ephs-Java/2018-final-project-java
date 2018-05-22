@@ -33,7 +33,8 @@ public class Hangman {
 
 	}
 
-	public boolean checkLetter(String letter) {
+	public void checkLetter(String letter) {
+		this.word = this.word.toUpperCase();
 		int count = 0;
 		String n = "";
 		for (int i = 0; i < this.word.length(); i++) {
@@ -63,12 +64,10 @@ public class Hangman {
 		// records score
 		if (count > 0) {
 			System.out.println("You found a letter!");
-			return true;
 		} else {
 			misses++;
 			System.out.println("You missed!");
 
-			return false;
 
 		}
 
@@ -76,6 +75,13 @@ public class Hangman {
 
 	public String getWord(){
 		return word;
+	}
+
+	public ImageIcon[] getImages() {
+		return images;
+	}
+	public String getProgress(){
+		return progress;
 	}
 
 	

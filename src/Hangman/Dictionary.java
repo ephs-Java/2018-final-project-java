@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class Dictionary {
 	
-	private String filename = "words.txt";
+	private String filename = "food.txt";
 	private ArrayList<String> words;
 	
 	public Dictionary(){

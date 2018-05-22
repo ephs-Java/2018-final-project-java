@@ -23,6 +23,8 @@ import javax.swing.SwingConstants;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import java.awt.Toolkit;
+import java.awt.Color;
+import java.awt.Label;
 
 public class UI extends JFrame {
 	/**
@@ -47,6 +49,8 @@ public class UI extends JFrame {
 	private JButton[] buttons;
 	private JButton bBack;
 	private JPanel bpanel;
+	private JLabel hangingImage;
+	private Label progress;
 
 	/**
 	 * Launch the application.
@@ -69,13 +73,13 @@ public class UI extends JFrame {
 	 * Create the frame.
 	 */
 	public UI() {
-		
+
 		initContainers();
 		actions();
-		
+
 	}
 
-	private void makeButtons() {
+	public void makeButtons() {
 		// TODO Auto-generated method stub
 		int j = 65;
 
@@ -88,7 +92,15 @@ public class UI extends JFrame {
 			j++;
 		}
 		bpanel.setVisible(true);
-
+		for(int i = 0; i < buttons.length; i++){
+			final int index = i;
+			buttons[i].addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					h.checkLetter(buttons[index].getText());
+					progress.setText(h.getProgress());
+				}
+			});
+		}
 	}
 
 	public void initContainers() {
@@ -96,7 +108,7 @@ public class UI extends JFrame {
 		setTitle("Hangman");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 900, 600);
-		
+
 		contentPane = new JPanel();
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -104,25 +116,31 @@ public class UI extends JFrame {
 		 * Creates the start JPanel and adds components.
 		 */
 		pGame = new JPanel();
+		pGame.setBackground(Color.WHITE);
 		pGame.setEnabled(false);
 		pGame.setBounds(0, 0, 900, 600);
 		contentPane.add(pGame);
 		pGame.setLayout(null);
-		
-		
+
 		bpanel = new JPanel();
+		bpanel.setBackground(Color.WHITE);
 		bpanel.setBounds(100, 416, 703, 270);
 		pGame.add(bpanel);
 		bBack = new JButton("Back");
 		bBack.setBounds(710, 37, 173, 61);
 		pGame.add(bBack);
 		pGame.setVisible(false);
-		
-		JLabel hangingImage = new JLabel(new ImageIcon("img/-1.png"));
-		hangingImage.setBounds(100, 37, 687, 315);
+
+		hangingImage = new JLabel();
+		hangingImage.setBounds(150, 37, 687, 315);
 		pGame.add(hangingImage);
-	
-		
+
+		progress = new Label();
+		progress.setAlignment(Label.CENTER);
+		progress.setFont(new Font("Lucida Grande", Font.PLAIN, 40));
+		progress.setBounds(10, 334, 873, 76);
+		pGame.add(progress);
+
 		pStart = new JPanel();
 		pStart.setBounds(0, 0, 900, 600);
 		contentPane.add(pStart);
@@ -181,8 +199,10 @@ public class UI extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				pGame.setVisible(true);
 				pStart.setVisible(false);
-				Hangman h = new Hangman();
+				startGame();
+
 			}
+
 		});
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -205,5 +225,11 @@ public class UI extends JFrame {
 			}
 		});
 
+	}
+
+	public void startGame() {
+		h = new Hangman();
+		hangingImage.setIcon(h.getImages()[0]);
+		progress.setText(h.getProgress());
 	}
 }
