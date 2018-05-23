@@ -15,7 +15,7 @@ public class Hangman {
 		this.misses = 0;
 		this.progress = "";
 		this.newWord();
-		this.images = new ImageIcon[8];
+		this.images = new ImageIcon[6];
 		for(int i = 0; i< images.length; i++){
 			images[i] = new ImageIcon("img/" + i + ".png");
 		}
@@ -29,6 +29,7 @@ public class Hangman {
 		for (int i = 0; i < this.word.length(); i++) {
 
 			this.progress += "_";
+			
 		}
 
 	}
@@ -48,30 +49,44 @@ public class Hangman {
 				if (this.progress.charAt(i) == '_') {
 					// if they missed add a _ to progress
 					n += "_";
-
-				} else {
+					
+					
+				}  else{
 					// adds the char to the new string if it has already been
 					// found
 					n += this.word.charAt(i);
 
 				}
 			}
-
+	
 		}
+
+	
 
 		this.progress = n;
-		System.out.println(this.progress);
+		
 		// records score
-		if (count > 0) {
-			System.out.println("You found a letter!");
-		} else {
+		if (count == 0) {
 			misses++;
-			System.out.println("You missed!");
-
-
 		}
-
+		
+		
+		
+		
 	}
+	public String checkStatus(){
+		if(misses > 5){
+			return "You lost!";
+		}else if(this.word.equals(this.progress)){
+			return "You won!";
+		}else{
+			return "";
+		}
+		
+		
+		
+	}
+
 
 	public String getWord(){
 		return word;
@@ -82,6 +97,9 @@ public class Hangman {
 	}
 	public String getProgress(){
 		return progress;
+	}
+	public ImageIcon getImage(){
+		return images[misses];
 	}
 
 	

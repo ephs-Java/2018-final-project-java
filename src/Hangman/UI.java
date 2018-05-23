@@ -51,6 +51,7 @@ public class UI extends JFrame {
 	private JPanel bpanel;
 	private JLabel hangingImage;
 	private Label progress;
+	private JLabel status;
 
 	/**
 	 * Launch the application.
@@ -86,8 +87,9 @@ public class UI extends JFrame {
 		for (int i = 0; i < buttons.length; i++) {
 			char c = (char) j;
 			String letter = "" + c;
-
+			
 			buttons[i] = new JButton(letter);
+			
 			bpanel.add(buttons[i]);
 			j++;
 		}
@@ -98,6 +100,8 @@ public class UI extends JFrame {
 				public void actionPerformed(ActionEvent e) {
 					h.checkLetter(buttons[index].getText());
 					progress.setText(h.getProgress());
+					hangingImage.setIcon(h.getImage());
+					status.setText(h.checkStatus());
 				}
 			});
 		}
@@ -116,14 +120,14 @@ public class UI extends JFrame {
 		 * Creates the start JPanel and adds components.
 		 */
 		pGame = new JPanel();
-		pGame.setBackground(Color.WHITE);
+		pGame.setBackground(new Color(0, 128, 128));
 		pGame.setEnabled(false);
 		pGame.setBounds(0, 0, 900, 600);
 		contentPane.add(pGame);
 		pGame.setLayout(null);
 
 		bpanel = new JPanel();
-		bpanel.setBackground(Color.WHITE);
+		bpanel.setBackground(new Color(0, 128, 128));
 		bpanel.setBounds(100, 416, 703, 270);
 		pGame.add(bpanel);
 		bBack = new JButton("Back");
@@ -137,9 +141,13 @@ public class UI extends JFrame {
 
 		progress = new Label();
 		progress.setAlignment(Label.CENTER);
-		progress.setFont(new Font("Lucida Grande", Font.PLAIN, 40));
+		progress.setFont(new Font("Comic Sans MS", Font.PLAIN, 40));
 		progress.setBounds(10, 334, 873, 76);
 		pGame.add(progress);
+		
+		status = new JLabel("");
+		status.setBounds(10, 6, 173, 61);
+		pGame.add(status);
 
 		pStart = new JPanel();
 		pStart.setBounds(0, 0, 900, 600);
@@ -163,6 +171,7 @@ public class UI extends JFrame {
 		 * Creates JPanel rules and creates buttons and text box.
 		 */
 		pRules = new JPanel();
+		pRules.setBackground(new Color(123, 104, 238));
 		pRules.setBounds(0, 0, 900, 600);
 		contentPane.add(pRules);
 		pRules.setLayout(null);
@@ -176,7 +185,7 @@ public class UI extends JFrame {
 		txtpnTheWordTo.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
 		txtpnTheWordTo.setEditable(false);
 		txtpnTheWordTo.setText(
-				"The word to guess is represented by a row of dashes, representing each letter of the word. If the guessing player suggests a letter which occurs in the word, the other player writes it in all its correct positions. If the suggested letter or number does not occur in the word, the other player draws one element of a hanged man stick figure as a tally mark.\nThe player guessing the word may, at any time, attempt to guess the whole word. If the word is correct, the game is over and the guesser wins. Otherwise, the other player may choose to penalize the guesser by adding an element to the diagram. On the other hand, if the other player makes enough incorrect guesses to allow his opponent to complete the diagram, the game is also over, this time with the guesser losing. However, the guesser can also win by guessing all the letters or numbers that appears in the word, thereby completing the word, before the diagram is completed.\n");
+				"The word to guess is represented by a row of dashes, representing each letter of the word. If the guessing player suggests a letter which occurs in the word, the other player writes it in all its correct positions. If the suggested letter or number does not occur in the word, the other player draws one element of a hanged man stick figure as a tally mark.\nThe player guessing the word may, at any time, attempt to guess the whole word. If the word is correct, the game is over and the guesser wins. Otherwise, the other player may choose to penalize the guesser by adding an element to the diagram. On the other hand, if the other player makes enough incorrect guesses to allow his opponent to complete the diagram, the game is also over, this time with the guesser losing. However, the guesser can also win by guessing all the letters or numbers that appears in the word, thereby completing the word, before the diagram is completed.\nIn our version of Hangman, you want to accumulate the most points as possible. Make sure to watch the Eclipse Counsole for in-game messages!\nGood Luck!\n");
 		scrollPane.setViewportView(txtpnTheWordTo);
 		pRules.setVisible(false);
 		/*
