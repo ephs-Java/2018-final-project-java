@@ -2,8 +2,6 @@ package Hangman;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
-
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -12,8 +10,6 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.ImageIcon;
 
 public class Hangman {
-	private String name;
-	private int score;
 	private String word;
 	private String progress;
 	private int lives;
@@ -55,7 +51,7 @@ public class Hangman {
 
 	}
 
-	public void checkLetter(String letter){
+	public boolean checkLetter(String letter){
 
 		int count = 0;
 
@@ -87,12 +83,16 @@ public class Hangman {
 		// records score
 		if (count == 0){
 			lives--;
+			
 			try {
 				playSound("img/no.wav");
 			} catch (LineUnavailableException | UnsupportedAudioFileException | IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			return false;
+		}else{
+			return true;
 		}
 
 	}

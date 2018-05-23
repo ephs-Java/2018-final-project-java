@@ -5,7 +5,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import java.awt.Font;
-
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JButton;
@@ -15,9 +14,10 @@ import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
+
+import java.awt.Button;
 import java.awt.Color;
 import java.awt.Label;
-import java.awt.SystemColor;
 
 public class UI extends JFrame {
 	/**
@@ -37,7 +37,6 @@ public class UI extends JFrame {
 	private JPanel pRules;
 	private JButton btnBack;
 	private JPanel pGame;
-	private JLabel lblNewLabel;
 	private Hangman h;
 	private JButton[] buttons;
 	private JButton bBack;
@@ -86,14 +85,17 @@ public class UI extends JFrame {
 
 			bpanel.add(buttons[i]);
 			j++;
+			
 		}
 
 		bpanel.setVisible(true);
 		for (int i = 0; i < buttons.length; i++) {
+			
 			final int index = i;
 			buttons[i].addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					h.checkLetter(buttons[index].getText());
+					if(!h.checkLetter(buttons[index].getText()))
+						buttons[index].setForeground(Color.RED);
 					progress.setText(h.getProgress());
 					hangingImage.setIcon(h.getImage());
 					if (h.getLives() == 0) {
@@ -270,6 +272,9 @@ public class UI extends JFrame {
 		progress.setText(h.getProgress());
 		bpanel.setVisible(true);
 		word.setText("");
+		for(JButton b: buttons){
+			b.setForeground(Color.BLACK);
+		}
 		playagain.setVisible(false);
 	}
 }
