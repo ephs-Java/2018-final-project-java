@@ -10,15 +10,25 @@ public class Hangman {
 	private int lives;
 	private Dictionary d;
 	private ImageIcon[] images;
+	private ImageIcon win;
+	private String brokenword;
 	public Hangman(){
+		
+		
 
-		this.lives = 5;
+		this.lives = 6;
 		this.progress = "";
-		this.newWord();  
-		this.images = new ImageIcon[6];
+		this.newWord(); 
+		this.word = this.word.toUpperCase();
+		this.brokenword = "";
+		for(int i = 0; i < this.word.length(); i++ ){
+			this.brokenword += this.word.charAt(i) + " ";
+		}
+		this.images = new ImageIcon[7];
 		for(int i = images.length-1; i>= 0 ; i--){
 			images[i] = new ImageIcon("img/" + i + ".png");
 		}
+		this.win = new ImageIcon("img/win.png");
 
 }
 
@@ -27,21 +37,26 @@ public class Hangman {
 		this.d = new Dictionary();
 		this.word = this.d.getWord();
 		for (int i = 0; i < this.word.length(); i++) {
-
-			this.progress += "_";
+			if(this.word.charAt(i)== ' ')
+				this.progress += "  ";
+			else;
+				this.progress += "_ ";
+			
 			
 		}
-
+		
+		
 	}
 
 	public void checkLetter(String letter) {
-		this.word = this.word.toUpperCase();
+		
 		int count = 0;
+		
 		String n = "";
-		for (int i = 0; i < this.word.length(); i++) {
-			if (this.word.charAt(i) == letter.charAt(0)) {
+		for (int i = 0; i < brokenword.length(); i++) {
+			if (brokenword.charAt(i) == letter.charAt(0)) {
 				// adds the correct letter to the new progress
-				n += this.word.charAt(i);
+				n += brokenword.charAt(i);
 				count++;
 
 			} else {
@@ -54,7 +69,7 @@ public class Hangman {
 				}  else{
 					// adds the char to the new string if it has already been
 					// found
-					n += this.word.charAt(i);
+					n += brokenword.charAt(i);
 
 				}
 			}
@@ -74,20 +89,16 @@ public class Hangman {
 		
 		
 	}
-	public String checkStatus(){
-		if(lives ==  0){
-			return "You lost!";
-		}else if(this.word.equals(this.progress)){
-			return "You won!";
-		}else{
-			return "";
-		}
 		
 		
 		
+	
+	public int getLives(){
+		return lives;
 	}
-
-
+	public boolean wordEquals(){
+		return this.brokenword.equals(this.progress);
+	}
 	public String getWord(){
 		return word;
 	}
@@ -99,6 +110,8 @@ public class Hangman {
 		return progress;
 	}
 	public ImageIcon getImage(){
+		if(wordEquals())
+			return win;
 		return images[lives];
 	}
 

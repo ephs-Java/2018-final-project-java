@@ -40,7 +40,7 @@ public class UI extends JFrame {
 	private JPanel bpanel;
 	private JLabel hangingImage;
 	private Label progress;
-	private JLabel status;
+	private JLabel word;
 
 	/**
 	 * Launch the application.
@@ -82,6 +82,7 @@ public class UI extends JFrame {
 			bpanel.add(buttons[i]);
 			j++;
 		}
+		
 		bpanel.setVisible(true);
 		for(int i = 0; i < buttons.length; i++){
 			final int index = i;
@@ -90,7 +91,12 @@ public class UI extends JFrame {
 					h.checkLetter(buttons[index].getText());
 					progress.setText(h.getProgress());
 					hangingImage.setIcon(h.getImage());
-					status.setText(h.checkStatus());
+					if(h.getLives() == 0){
+						bpanel.setVisible(false);
+						word.setText("The word was: " + h.getWord());
+					}else if(h.wordEquals()){
+						bpanel.setVisible(false);
+					}
 				}
 			});
 		}
@@ -108,6 +114,37 @@ public class UI extends JFrame {
 		/*
 		 * Creates the start JPanel and adds components.
 		 */
+				pGame = new JPanel();
+				pGame.setBackground(new Color(0, 128, 128));
+				pGame.setEnabled(false);
+				pGame.setBounds(0, 0, 900, 600);
+				contentPane.add(pGame);
+				pGame.setLayout(null);
+						
+						word = new JLabel("");
+						word.setFont(new Font("Lucida Grande", Font.PLAIN, 25));
+						word.setBounds(373, 400, 414, 61);
+						pGame.add(word);
+				
+						bpanel = new JPanel();
+						bpanel.setBackground(new Color(0, 128, 128));
+						bpanel.setBounds(100, 416, 703, 270);
+						pGame.add(bpanel);
+						bBack = new JButton("Back");
+						bBack.setFont(new Font("Copperplate", Font.BOLD, 16));
+						bBack.setBounds(710, 37, 173, 61);
+						pGame.add(bBack);
+						pGame.setVisible(false);
+						
+								hangingImage = new JLabel();
+								hangingImage.setBounds(150, 37, 687, 315);
+								pGame.add(hangingImage);
+								
+										progress = new Label();
+										progress.setAlignment(Label.CENTER);
+										progress.setFont(new Font("Comic Sans MS", Font.PLAIN, 40));
+										progress.setBounds(10, 332, 873, 76);
+										pGame.add(progress);
 		
 				pStart = new JPanel();
 				pStart.setBackground(new Color(25, 25, 112));
@@ -133,36 +170,6 @@ public class UI extends JFrame {
 				btnNewButton.setFont(new Font("Copperplate", Font.BOLD, 16));
 				btnNewButton.setBounds(300, 280, 300, 100);
 				pStart.add(btnNewButton);
-		pGame = new JPanel();
-		pGame.setBackground(new Color(0, 128, 128));
-		pGame.setEnabled(false);
-		pGame.setBounds(0, 0, 900, 600);
-		contentPane.add(pGame);
-		pGame.setLayout(null);
-
-		bpanel = new JPanel();
-		bpanel.setBackground(new Color(0, 128, 128));
-		bpanel.setBounds(100, 416, 703, 270);
-		pGame.add(bpanel);
-		bBack = new JButton("Back");
-		bBack.setFont(new Font("Copperplate", Font.BOLD, 16));
-		bBack.setBounds(710, 37, 173, 61);
-		pGame.add(bBack);
-		pGame.setVisible(false);
-
-		hangingImage = new JLabel();
-		hangingImage.setBounds(150, 37, 687, 315);
-		pGame.add(hangingImage);
-
-		progress = new Label();
-		progress.setAlignment(Label.CENTER);
-		progress.setFont(new Font("Comic Sans MS", Font.PLAIN, 40));
-		progress.setBounds(10, 334, 873, 76);
-		pGame.add(progress);
-		
-		status = new JLabel("");
-		status.setBounds(10, 6, 173, 61);
-		pGame.add(status);
 		/*
 		 * Creates JPanel rules and creates buttons and text box.
 		 */
@@ -237,5 +244,7 @@ public class UI extends JFrame {
 		h = new Hangman();
 		hangingImage.setIcon(h.getImage());
 		progress.setText(h.getProgress());
+		bpanel.setVisible(true);
+		word.setText("");
 	}
 }
