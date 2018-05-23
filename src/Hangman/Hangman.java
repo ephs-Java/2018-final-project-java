@@ -14,7 +14,7 @@ public class Hangman {
 
 		this.lives = 5;
 		this.progress = "";
-		this.newWord();
+		this.newWord();  
 		this.images = new ImageIcon[6];
 		for(int i = images.length-1; i>= 0 ; i--){
 			images[i] = new ImageIcon("img/" + i + ".png");

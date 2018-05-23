@@ -138,6 +138,7 @@ public class UI extends JFrame {
 		pGame.add(status);
 
 		pStart = new JPanel();
+		pStart.setBackground(new Color(25, 25, 112));
 		pStart.setBounds(0, 0, 900, 600);
 		contentPane.add(pStart);
 		pStart.setLayout(null);
