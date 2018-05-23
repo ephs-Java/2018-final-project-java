@@ -5,8 +5,12 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import java.awt.Font;
+
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 import javax.swing.JScrollPane;
@@ -41,6 +45,7 @@ public class UI extends JFrame {
 	private JLabel hangingImage;
 	private Label progress;
 	private JLabel word;
+	private JButton playagain;
 
 	/**
 	 * Launch the application.
@@ -76,26 +81,34 @@ public class UI extends JFrame {
 		for (int i = 0; i < buttons.length; i++) {
 			char c = (char) j;
 			String letter = "" + c;
-			
+
 			buttons[i] = new JButton(letter);
-			
+
 			bpanel.add(buttons[i]);
 			j++;
 		}
-		
+
 		bpanel.setVisible(true);
-		for(int i = 0; i < buttons.length; i++){
+		for (int i = 0; i < buttons.length; i++) {
 			final int index = i;
 			buttons[i].addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					h.checkLetter(buttons[index].getText());
 					progress.setText(h.getProgress());
 					hangingImage.setIcon(h.getImage());
-					if(h.getLives() == 0){
+					if (h.getLives() == 0) {
 						bpanel.setVisible(false);
 						word.setText("The word was: " + h.getWord());
-					}else if(h.wordEquals()){
+						playagain.setVisible(true);
+					} else if (h.wordEquals()) {
 						bpanel.setVisible(false);
+						playagain.setVisible(true);
+						try {
+							h.playSound("img/win.wav");
+						} catch (LineUnavailableException | UnsupportedAudioFileException | IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 					}
 				}
 			});
@@ -114,62 +127,68 @@ public class UI extends JFrame {
 		/*
 		 * Creates the start JPanel and adds components.
 		 */
-				pGame = new JPanel();
-				pGame.setBackground(new Color(0, 128, 128));
-				pGame.setEnabled(false);
-				pGame.setBounds(0, 0, 900, 600);
-				contentPane.add(pGame);
-				pGame.setLayout(null);
-						
-						word = new JLabel("");
-						word.setFont(new Font("Lucida Grande", Font.PLAIN, 25));
-						word.setBounds(373, 400, 414, 61);
-						pGame.add(word);
-				
-						bpanel = new JPanel();
-						bpanel.setBackground(new Color(0, 128, 128));
-						bpanel.setBounds(100, 416, 703, 270);
-						pGame.add(bpanel);
-						bBack = new JButton("Back");
-						bBack.setFont(new Font("Copperplate", Font.BOLD, 16));
-						bBack.setBounds(710, 37, 173, 61);
-						pGame.add(bBack);
-						pGame.setVisible(false);
-						
-								hangingImage = new JLabel();
-								hangingImage.setBounds(150, 37, 687, 315);
-								pGame.add(hangingImage);
-								
-										progress = new Label();
-										progress.setAlignment(Label.CENTER);
-										progress.setFont(new Font("Comic Sans MS", Font.PLAIN, 40));
-										progress.setBounds(10, 332, 873, 76);
-										pGame.add(progress);
-		
-				pStart = new JPanel();
-				pStart.setBackground(new Color(25, 25, 112));
-				pStart.setBounds(0, 0, 900, 600);
-				contentPane.add(pStart);
-				pStart.setLayout(null);
-				bStart = new JButton("Start");
-				bStart.setFont(new Font("Copperplate", Font.BOLD, 18));
-				bStart.setBackground(new Color(255, 255, 255));
-				bStart.setBounds(300, 147, 300, 100);
-				pStart.add(bStart);
-				lTitle = new JLabel("Hangman\n");
-				lTitle.setForeground(new Color(255, 255, 255));
-				lTitle.setBounds(175, 6, 565, 139);
-				pStart.add(lTitle);
-				lTitle.setHorizontalAlignment(SwingConstants.CENTER);
-				lTitle.setFont(new Font("Wawati SC", Font.BOLD | Font.ITALIC, 99));
-				bQuit = new JButton("Quit");
-				bQuit.setFont(new Font("Copperplate", Font.BOLD, 16));
-				bQuit.setBounds(300, 403, 300, 100);
-				pStart.add(bQuit);
-				btnNewButton = new JButton("Rules");
-				btnNewButton.setFont(new Font("Copperplate", Font.BOLD, 16));
-				btnNewButton.setBounds(300, 280, 300, 100);
-				pStart.add(btnNewButton);
+		pGame = new JPanel();
+		pGame.setBackground(new Color(0, 128, 128));
+		pGame.setEnabled(false);
+		pGame.setBounds(0, 0, 900, 600);
+		contentPane.add(pGame);
+		pGame.setLayout(null);
+
+		playagain = new JButton("Play again?");
+
+		playagain.setBounds(373, 450, 117, 29);
+		pGame.add(playagain);
+		playagain.setVisible(false);
+
+		word = new JLabel("");
+		word.setFont(new Font("Lucida Grande", Font.PLAIN, 25));
+		word.setBounds(373, 400, 414, 61);
+		pGame.add(word);
+
+		bpanel = new JPanel();
+		bpanel.setBackground(new Color(0, 128, 128));
+		bpanel.setBounds(100, 416, 703, 270);
+		pGame.add(bpanel);
+		bBack = new JButton("Back");
+		bBack.setFont(new Font("Copperplate", Font.BOLD, 16));
+		bBack.setBounds(710, 37, 173, 61);
+		pGame.add(bBack);
+		pGame.setVisible(false);
+
+		hangingImage = new JLabel();
+		hangingImage.setBounds(150, 37, 687, 315);
+		pGame.add(hangingImage);
+
+		progress = new Label();
+		progress.setAlignment(Label.CENTER);
+		progress.setFont(new Font("Comic Sans MS", Font.PLAIN, 40));
+		progress.setBounds(10, 332, 873, 76);
+		pGame.add(progress);
+
+		pStart = new JPanel();
+		pStart.setBackground(new Color(25, 25, 112));
+		pStart.setBounds(0, 0, 900, 600);
+		contentPane.add(pStart);
+		pStart.setLayout(null);
+		bStart = new JButton("Start");
+		bStart.setFont(new Font("Copperplate", Font.BOLD, 18));
+		bStart.setBackground(new Color(255, 255, 255));
+		bStart.setBounds(300, 147, 300, 100);
+		pStart.add(bStart);
+		lTitle = new JLabel("Hangman\n");
+		lTitle.setForeground(new Color(255, 255, 255));
+		lTitle.setBounds(175, 6, 565, 139);
+		pStart.add(lTitle);
+		lTitle.setHorizontalAlignment(SwingConstants.CENTER);
+		lTitle.setFont(new Font("Wawati SC", Font.BOLD | Font.ITALIC, 99));
+		bQuit = new JButton("Quit");
+		bQuit.setFont(new Font("Copperplate", Font.BOLD, 16));
+		bQuit.setBounds(300, 403, 300, 100);
+		pStart.add(bQuit);
+		btnNewButton = new JButton("Rules");
+		btnNewButton.setFont(new Font("Copperplate", Font.BOLD, 16));
+		btnNewButton.setBounds(300, 280, 300, 100);
+		pStart.add(btnNewButton);
 		/*
 		 * Creates JPanel rules and creates buttons and text box.
 		 */
@@ -237,6 +256,11 @@ public class UI extends JFrame {
 				pGame.setVisible(false);
 			}
 		});
+		playagain.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				startGame();
+			}
+		});
 
 	}
 
@@ -246,5 +270,6 @@ public class UI extends JFrame {
 		progress.setText(h.getProgress());
 		bpanel.setVisible(true);
 		word.setText("");
+		playagain.setVisible(false);
 	}
 }
