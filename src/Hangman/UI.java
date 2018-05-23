@@ -107,6 +107,28 @@ public class UI extends JFrame {
 		/*
 		 * Creates the start JPanel and adds components.
 		 */
+		
+				pStart = new JPanel();
+				pStart.setBackground(new Color(25, 25, 112));
+				pStart.setBounds(0, 0, 900, 600);
+				contentPane.add(pStart);
+				pStart.setLayout(null);
+				bStart = new JButton("Start");
+				bStart.setBackground(new Color(154, 205, 50));
+				bStart.setBounds(300, 147, 300, 100);
+				pStart.add(bStart);
+				lTitle = new JLabel("Hangman\n");
+				lTitle.setForeground(new Color(255, 255, 255));
+				lTitle.setBounds(175, 6, 565, 155);
+				pStart.add(lTitle);
+				lTitle.setHorizontalAlignment(SwingConstants.CENTER);
+				lTitle.setFont(new Font("Lucida Grande", Font.PLAIN, 90));
+				bQuit = new JButton("Quit");
+				bQuit.setBounds(300, 403, 300, 100);
+				pStart.add(bQuit);
+				btnNewButton = new JButton("Rules");
+				btnNewButton.setBounds(300, 280, 300, 100);
+				pStart.add(btnNewButton);
 		pGame = new JPanel();
 		pGame.setBackground(new Color(0, 128, 128));
 		pGame.setEnabled(false);
@@ -136,26 +158,6 @@ public class UI extends JFrame {
 		status = new JLabel("");
 		status.setBounds(10, 6, 173, 61);
 		pGame.add(status);
-
-		pStart = new JPanel();
-		pStart.setBackground(new Color(25, 25, 112));
-		pStart.setBounds(0, 0, 900, 600);
-		contentPane.add(pStart);
-		pStart.setLayout(null);
-		bStart = new JButton("Start");
-		bStart.setBounds(300, 147, 300, 100);
-		pStart.add(bStart);
-		lTitle = new JLabel("Hangman\n");
-		lTitle.setBounds(175, 6, 565, 155);
-		pStart.add(lTitle);
-		lTitle.setHorizontalAlignment(SwingConstants.CENTER);
-		lTitle.setFont(new Font("Lucida Grande", Font.PLAIN, 90));
-		bQuit = new JButton("Quit");
-		bQuit.setBounds(300, 403, 300, 100);
-		pStart.add(bQuit);
-		btnNewButton = new JButton("Rules");
-		btnNewButton.setBounds(300, 280, 300, 100);
-		pStart.add(btnNewButton);
 		/*
 		 * Creates JPanel rules and creates buttons and text box.
 		 */
