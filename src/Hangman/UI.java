@@ -13,6 +13,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import java.awt.Color;
 import java.awt.Label;
+import java.awt.SystemColor;
 
 public class UI extends JFrame {
 	/**
@@ -114,19 +115,22 @@ public class UI extends JFrame {
 				contentPane.add(pStart);
 				pStart.setLayout(null);
 				bStart = new JButton("Start");
-				bStart.setBackground(new Color(154, 205, 50));
+				bStart.setFont(new Font("Copperplate", Font.BOLD, 18));
+				bStart.setBackground(new Color(255, 255, 255));
 				bStart.setBounds(300, 147, 300, 100);
 				pStart.add(bStart);
 				lTitle = new JLabel("Hangman\n");
 				lTitle.setForeground(new Color(255, 255, 255));
-				lTitle.setBounds(175, 6, 565, 155);
+				lTitle.setBounds(175, 6, 565, 139);
 				pStart.add(lTitle);
 				lTitle.setHorizontalAlignment(SwingConstants.CENTER);
-				lTitle.setFont(new Font("Lucida Grande", Font.PLAIN, 90));
+				lTitle.setFont(new Font("Wawati SC", Font.BOLD | Font.ITALIC, 99));
 				bQuit = new JButton("Quit");
+				bQuit.setFont(new Font("Copperplate", Font.BOLD, 16));
 				bQuit.setBounds(300, 403, 300, 100);
 				pStart.add(bQuit);
 				btnNewButton = new JButton("Rules");
+				btnNewButton.setFont(new Font("Copperplate", Font.BOLD, 16));
 				btnNewButton.setBounds(300, 280, 300, 100);
 				pStart.add(btnNewButton);
 		pGame = new JPanel();
@@ -141,6 +145,7 @@ public class UI extends JFrame {
 		bpanel.setBounds(100, 416, 703, 270);
 		pGame.add(bpanel);
 		bBack = new JButton("Back");
+		bBack.setFont(new Font("Copperplate", Font.BOLD, 16));
 		bBack.setBounds(710, 37, 173, 61);
 		pGame.add(bBack);
 		pGame.setVisible(false);
@@ -167,16 +172,17 @@ public class UI extends JFrame {
 		contentPane.add(pRules);
 		pRules.setLayout(null);
 		btnBack = new JButton("Back");
-		btnBack.setBounds(349, 248, 190, 91);
+		btnBack.setFont(new Font("Copperplate", Font.BOLD, 14));
+		btnBack.setBounds(349, 420, 190, 91);
 		pRules.add(btnBack);
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(6, 6, 888, 226);
+		scrollPane.setBounds(6, 6, 888, 370);
 		pRules.add(scrollPane);
 		JTextPane txtpnTheWordTo = new JTextPane();
-		txtpnTheWordTo.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
+		txtpnTheWordTo.setFont(new Font("Comic Sans MS", Font.BOLD, 16));
 		txtpnTheWordTo.setEditable(false);
 		txtpnTheWordTo.setText(
-				"The word to guess is represented by a row of dashes, representing each letter of the word. If the guessing player suggests a letter which occurs in the word, the other player writes it in all its correct positions. If the suggested letter or number does not occur in the word, the other player draws one element of a hanged man stick figure as a tally mark.\nThe player guessing the word may, at any time, attempt to guess the whole word. If the word is correct, the game is over and the guesser wins. Otherwise, the other player may choose to penalize the guesser by adding an element to the diagram. On the other hand, if the other player makes enough incorrect guesses to allow his opponent to complete the diagram, the game is also over, this time with the guesser losing. However, the guesser can also win by guessing all the letters or numbers that appears in the word, thereby completing the word, before the diagram is completed.\nIn our version of Hangman, you want to accumulate the most points as possible. Make sure to watch the Eclipse Counsole for in-game messages!\nGood Luck!\n");
+				"The word to guess is represented by a row of dashes, representing each letter of the word. If the guessing player suggests a letter which occurs in the word, the other player writes it in all its correct positions. If the suggested letter or number does not occur in the word, the other player draws one element of a hanged man stick figure as a tally mark.\nThe player guessing the word may, at any time, attempt to guess the whole word. If the word is correct, the game is over and the guesser wins. Otherwise, the other player may choose to penalize the guesser by adding an element to the diagram. On the other hand, if the other player makes enough incorrect guesses to allow his opponent to complete the diagram, the game is also over, this time with the guesser losing. However, the guesser can also win by guessing all the letters or numbers that appears in the word, thereby completing the word, before the diagram is completed.\nIn our version of Hangman, you want to accumulate the most points as possible. Make sure to watch the Eclipse Counsole for in-game messages!\n\nGood Luck!");
 		scrollPane.setViewportView(txtpnTheWordTo);
 		pRules.setVisible(false);
 		/*
