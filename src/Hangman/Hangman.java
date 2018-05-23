@@ -7,20 +7,20 @@ public class Hangman {
 	private int score;
 	private String word;
 	private String progress;
-	private int misses;
+	private int lives;
 	private Dictionary d;
 	private ImageIcon[] images;
 	public Hangman(){
 
-		this.misses = 0;
+		this.lives = 5;
 		this.progress = "";
 		this.newWord();
 		this.images = new ImageIcon[6];
-		for(int i = 0; i< images.length; i++){
+		for(int i = images.length-1; i>= 0 ; i--){
 			images[i] = new ImageIcon("img/" + i + ".png");
 		}
 
-	}
+}
 
 	public void newWord(){
 		// makes a dictionary and creates the censored word
@@ -67,7 +67,7 @@ public class Hangman {
 		
 		// records score
 		if (count == 0) {
-			misses++;
+			lives--;
 		}
 		
 		
@@ -75,7 +75,7 @@ public class Hangman {
 		
 	}
 	public String checkStatus(){
-		if(misses > 5){
+		if(lives ==  0){
 			return "You lost!";
 		}else if(this.word.equals(this.progress)){
 			return "You won!";
@@ -99,7 +99,7 @@ public class Hangman {
 		return progress;
 	}
 	public ImageIcon getImage(){
-		return images[misses];
+		return images[lives];
 	}
 
 	

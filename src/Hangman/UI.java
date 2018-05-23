@@ -226,7 +226,7 @@ public class UI extends JFrame {
 
 	public void startGame() {
 		h = new Hangman();
-		hangingImage.setIcon(h.getImages()[0]);
+		hangingImage.setIcon(h.getImage());
 		progress.setText(h.getProgress());
 	}
 }
