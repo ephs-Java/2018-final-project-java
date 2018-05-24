@@ -36,7 +36,8 @@ computer program
 configure
 cookie
 copy
-CPU (central processing unit)
+central processing unit
+CPU
 cybercrime
 cyberspace
 dashboard
@@ -50,7 +51,8 @@ desktop
 development
 digital
 disk
-DNS (domain name system)
+domain name system
+DNS
 document
 domain
 domain name
@@ -58,7 +60,8 @@ dot
 dot matrix
 download
 drag
-DVD (digital versatile disc)
+digital versatile disc
+DVD
 dynamic
 email
 emoticon
@@ -66,7 +69,8 @@ encrypt
 encryption
 enter
 exabyte
-FAQ (frequently asked questions)
+frequently asked questions
+FAQ
 file
 finder
 firewall
@@ -154,12 +158,14 @@ programmer
 protocol
 queue
 QWERTY
-RAM (random access memory)
+random access memory
+RAM
 real-time
 reboot
 resolution
 restore
-ROM (read only memory)
+read only memory
+ROM
 root
 router
 runtime
