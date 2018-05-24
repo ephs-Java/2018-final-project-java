@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /0.png
 /1.png
 /2.png
@@ -6,3 +7,12 @@
 /5.png
 /lose.png
 /win.png
+=======
+/.DS_Store
+/.gitignore
+/Hangman/
+/oof.wav
+/win.wav
+/no.wav
+>>>>>>> branch 'master' of https://github.com/ephs-Java/2018-final-project-java.git
+/6.png
