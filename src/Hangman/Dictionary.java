@@ -7,10 +7,10 @@ import java.util.Scanner;
 
 public class Dictionary {
 	
-	private String filename = "food.txt";
+	//private String filename = "computer.txt";
 	private ArrayList<String> words;
 	
-	public Dictionary(){
+	public Dictionary(String filename){
 		
 		@SuppressWarnings("resource")
 		Scanner f;
