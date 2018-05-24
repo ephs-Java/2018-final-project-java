@@ -17,9 +17,9 @@ public class Hangman {
 	private ImageIcon[] images;
 	private ImageIcon win;
 	private String brokenword;
-
-	public Hangman() {
-
+	private String filename;
+	public Hangman(String filename) {
+		this.filename = filename;
 		this.lives = 6;
 		this.progress = "";
 		this.newWord();
@@ -38,7 +38,7 @@ public class Hangman {
 
 	public void newWord() {
 		// makes a dictionary and creates the censored word
-		this.d = new Dictionary();
+		this.d = new Dictionary(filename);
 		this.word = this.d.getWord();
 		for (int i = 0; i < this.word.length(); i++) {
 			if (this.word.charAt(i) == ' ')

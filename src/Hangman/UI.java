@@ -18,6 +18,8 @@ import javax.swing.JTextPane;
 import java.awt.Button;
 import java.awt.Color;
 import java.awt.Label;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
 
 public class UI extends JFrame {
 	/**
@@ -45,7 +47,7 @@ public class UI extends JFrame {
 	private Label progress;
 	private JLabel word;
 	private JButton playagain;
-
+	private String filename;
 	/**
 	 * Launch the application.
 	 */
@@ -121,6 +123,7 @@ public class UI extends JFrame {
 	}
 
 	public void initContainers() {
+		filename = "words.txt";
 		buttons = new JButton[26];
 		setTitle("Hangman");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -132,6 +135,42 @@ public class UI extends JFrame {
 		/*
 		 * Creates the start JPanel and adds components.
 		 */
+		
+				pStart = new JPanel();
+				pStart.setBackground(new Color(25, 25, 112));
+				pStart.setBounds(0, 0, 900, 600);
+				contentPane.add(pStart);
+				pStart.setLayout(null);
+				bStart = new JButton("Start");
+				bStart.setFont(new Font("Copperplate", Font.BOLD, 18));
+				bStart.setBackground(new Color(255, 255, 255));
+				bStart.setBounds(300, 147, 300, 100);
+				pStart.add(bStart);
+				lTitle = new JLabel("Hangman\n");
+				lTitle.setForeground(new Color(255, 255, 255));
+				lTitle.setBounds(175, 6, 565, 139);
+				pStart.add(lTitle);
+				lTitle.setHorizontalAlignment(SwingConstants.CENTER);
+				lTitle.setFont(new Font("Wawati SC", Font.BOLD | Font.ITALIC, 99));
+				bQuit = new JButton("Quit");
+				bQuit.setFont(new Font("Copperplate", Font.BOLD, 16));
+				bQuit.setBounds(300, 403, 300, 100);
+				pStart.add(bQuit);
+				btnNewButton = new JButton("Rules");
+				btnNewButton.setFont(new Font("Copperplate", Font.BOLD, 16));
+				btnNewButton.setBounds(300, 280, 300, 100);
+				pStart.add(btnNewButton);
+				String[] items = {"words.txt", "countries.txt", "computer.txt", "food.txt"};
+				JComboBox<String> comboBox = new JComboBox<>(items);
+				comboBox.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						JComboBox<String> combo = (JComboBox<String>) e.getSource();
+						String choice = (String)combo.getSelectedItem();
+						updateLabel(choice);
+					}
+				});
+				comboBox.setBounds(365, 246, 176, 27);
+				pStart.add(comboBox);
 		pGame = new JPanel();
 		pGame.setBackground(new Color(0, 128, 128));
 		pGame.setEnabled(false);
@@ -169,31 +208,6 @@ public class UI extends JFrame {
 		progress.setFont(new Font("Comic Sans MS", Font.PLAIN, 40));
 		progress.setBounds(10, 332, 873, 76);
 		pGame.add(progress);
-
-		pStart = new JPanel();
-		pStart.setBackground(new Color(25, 25, 112));
-		pStart.setBounds(0, 0, 900, 600);
-		contentPane.add(pStart);
-		pStart.setLayout(null);
-		bStart = new JButton("Start");
-		bStart.setFont(new Font("Copperplate", Font.BOLD, 18));
-		bStart.setBackground(new Color(255, 255, 255));
-		bStart.setBounds(300, 147, 300, 100);
-		pStart.add(bStart);
-		lTitle = new JLabel("Hangman\n");
-		lTitle.setForeground(new Color(255, 255, 255));
-		lTitle.setBounds(175, 6, 565, 139);
-		pStart.add(lTitle);
-		lTitle.setHorizontalAlignment(SwingConstants.CENTER);
-		lTitle.setFont(new Font("Wawati SC", Font.BOLD | Font.ITALIC, 99));
-		bQuit = new JButton("Quit");
-		bQuit.setFont(new Font("Copperplate", Font.BOLD, 16));
-		bQuit.setBounds(300, 403, 300, 100);
-		pStart.add(bQuit);
-		btnNewButton = new JButton("Rules");
-		btnNewButton.setFont(new Font("Copperplate", Font.BOLD, 16));
-		btnNewButton.setBounds(300, 280, 300, 100);
-		pStart.add(btnNewButton);
 		/*
 		 * Creates JPanel rules and creates buttons and text box.
 		 */
@@ -225,7 +239,9 @@ public class UI extends JFrame {
 		makeButtons();
 
 	}
-
+	public void updateLabel(String c){
+		filename = c;
+	}
 	public void actions() {
 		bQuit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -270,7 +286,7 @@ public class UI extends JFrame {
 	}
 
 	public void startGame() {
-		h = new Hangman();
+		h = new Hangman(filename);
 		hangingImage.setIcon(h.getImage());
 		progress.setText(h.getProgress());
 		bpanel.setVisible(true);
