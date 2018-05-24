@@ -94,8 +94,11 @@ public class UI extends JFrame {
 			final int index = i;
 			buttons[i].addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					if(!h.checkLetter(buttons[index].getText()))
+					if(h.checkLetter(buttons[index].getText()))
+						buttons[index].setForeground(Color.GREEN);
+					else
 						buttons[index].setForeground(Color.RED);
+					
 					progress.setText(h.getProgress());
 					hangingImage.setIcon(h.getImage());
 					if (h.getLives() == 0) {
