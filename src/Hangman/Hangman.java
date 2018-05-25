@@ -2,6 +2,8 @@ package Hangman;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Scanner;
+
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -18,7 +20,14 @@ public class Hangman {
 	private ImageIcon win;
 	private String brokenword;
 	private String filename;
+	
+	private String name;
+	private int numCorrect;
+	
 	public Hangman(String filename) {
+//		Scanner in = new Scanner(System.in);
+//		System.out.print("Type your name: ");
+//		this.name = in.nextLine();
 		this.filename = filename;
 		this.lives = 6;
 		this.progress = "";
@@ -33,7 +42,15 @@ public class Hangman {
 			images[i] = new ImageIcon("img/" + i + ".png");
 		}
 		this.win = new ImageIcon("img/win.png");
-
+//		in.close();
+	}
+	
+	public String getName() {
+		return this.name;
+	}
+	
+	public int getNumCorrect() {
+		return this.numCorrect;
 	}
 
 	public void newWord() {
@@ -43,16 +60,11 @@ public class Hangman {
 		for (int i = 0; i < this.word.length(); i++) {
 			if (this.word.charAt(i) == ' ')
 				this.progress += "  ";
-			else
-				;
-			this.progress += "_ ";
-
+			else this.progress += "_ ";
 		}
-
 	}
 
 	public boolean checkLetter(String letter){
-
 		int count = 0;
 
 		String n = "";
@@ -72,12 +84,9 @@ public class Hangman {
 					// adds the char to the new string if it has already been
 					// found
 					n += brokenword.charAt(i);
-
 				}
 			}
-
 		}
-
 		this.progress = n;
 
 		// records score
@@ -91,10 +100,7 @@ public class Hangman {
 				e.printStackTrace();
 			}
 			return false;
-		}else{
-			return true;
-		}
-
+		} else return true;
 	}
 
 	public int getLives() {
@@ -122,6 +128,7 @@ public class Hangman {
 			return win;
 		return images[lives];
 	}
+	
 	public void playSound(String file)  throws LineUnavailableException, UnsupportedAudioFileException, IOException{
 		File soundFile = new File(file);
 		AudioInputStream input = AudioSystem.getAudioInputStream(soundFile);
@@ -129,5 +136,4 @@ public class Hangman {
 		clip.open(input);
 		clip.start();
 	}
-
 }

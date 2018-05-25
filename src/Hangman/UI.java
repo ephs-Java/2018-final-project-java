@@ -72,15 +72,15 @@ public class UI extends JFrame {
 
 	/**
 	 * Create the frame.
+	 * @throws IOException 
 	 */
-	public UI() {
+	public UI() throws IOException {
 
 		initContainers();
 		actions();
 		
-		this.name = ;
-		this.numCorrect = ;
-		leaderboard(name, numCorrect);
+		this.name = "default";
+		this.numCorrect = 0;
 	}
 	
 	/**
@@ -96,7 +96,7 @@ public class UI extends JFrame {
 		hl.printArrayList(lead);
 	}
 
-	public void makeButtons() {
+	public void makeButtons() throws IOException {
 		// TODO Auto-generated method stub
 		int j = 65;
 
@@ -131,6 +131,7 @@ public class UI extends JFrame {
 					} else if (h.wordEquals()) {
 						bpanel.setVisible(false);
 						playagain.setVisible(true);
+						
 						try {
 							h.playSound("img/win.wav");
 						} catch (LineUnavailableException | UnsupportedAudioFileException | IOException e1) {
@@ -140,10 +141,12 @@ public class UI extends JFrame {
 					}
 				}
 			});
+			this.numCorrect++;
+			leaderboard(name, numCorrect);
 		}
 	}
 
-	public void initContainers() {
+	public void initContainers() throws IOException {
 		filename = "words.txt";
 		buttons = new JButton[26];
 		setTitle("Hangman");
