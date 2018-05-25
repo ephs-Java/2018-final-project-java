@@ -10,6 +10,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 import javax.swing.JScrollPane;
@@ -47,6 +48,9 @@ public class UI extends JFrame {
 	private JButton playagain;
 	private String filename;
 	private JComboBox comboBox;
+	
+	private String name;
+	private int numCorrect;
 
 	/**
 	 * Launch the application.
@@ -64,6 +68,7 @@ public class UI extends JFrame {
 			}
 		});
 	}
+	
 
 	/**
 	 * Create the frame.
@@ -72,7 +77,23 @@ public class UI extends JFrame {
 
 		initContainers();
 		actions();
-
+		
+		this.name = ;
+		this.numCorrect = ;
+		leaderboard(name, numCorrect);
+	}
+	
+	/**
+	 * Adds to leaderboard the information obtained from the game.
+	 */
+	public void leaderboard(String player, int solved) throws IOException {
+		HangmanLeaderboard hl = new HangmanLeaderboard(player, solved);
+		String fileName = "/Users/90304318/git/leaderboard2018-90304318/HangmanLeaderboard.txt";;
+		//read existing file
+		ArrayList<String> lead = hl.readFile(fileName);
+		hl.addWordsSolved(lead);
+		hl.writeFile(lead);
+		hl.printArrayList(lead);
 	}
 
 	public void makeButtons() {
