@@ -15,11 +15,9 @@ import javax.swing.SwingConstants;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 
-import java.awt.Button;
 import java.awt.Color;
 import java.awt.Label;
 import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
 
 public class UI extends JFrame {
 	/**
@@ -48,6 +46,8 @@ public class UI extends JFrame {
 	private JLabel word;
 	private JButton playagain;
 	private String filename;
+	private JComboBox comboBox;
+
 	/**
 	 * Launch the application.
 	 */
@@ -87,20 +87,20 @@ public class UI extends JFrame {
 
 			bpanel.add(buttons[i]);
 			j++;
-			
+
 		}
 
 		bpanel.setVisible(true);
 		for (int i = 0; i < buttons.length; i++) {
-			
+
 			final int index = i;
 			buttons[i].addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					if(h.checkLetter(buttons[index].getText()))
+					if (h.checkLetter(buttons[index].getText()))
 						buttons[index].setForeground(Color.GREEN);
 					else
 						buttons[index].setForeground(Color.RED);
-					
+
 					progress.setText(h.getProgress());
 					hangingImage.setIcon(h.getImage());
 					if (h.getLives() == 0) {
@@ -135,42 +135,35 @@ public class UI extends JFrame {
 		/*
 		 * Creates the start JPanel and adds components.
 		 */
-		
-				pStart = new JPanel();
-				pStart.setBackground(new Color(25, 25, 112));
-				pStart.setBounds(0, 0, 900, 600);
-				contentPane.add(pStart);
-				pStart.setLayout(null);
-				bStart = new JButton("Start");
-				bStart.setFont(new Font("Copperplate", Font.BOLD, 18));
-				bStart.setBackground(new Color(255, 255, 255));
-				bStart.setBounds(300, 147, 300, 100);
-				pStart.add(bStart);
-				lTitle = new JLabel("Hangman\n");
-				lTitle.setForeground(new Color(255, 255, 255));
-				lTitle.setBounds(175, 6, 565, 139);
-				pStart.add(lTitle);
-				lTitle.setHorizontalAlignment(SwingConstants.CENTER);
-				lTitle.setFont(new Font("Wawati SC", Font.BOLD | Font.ITALIC, 99));
-				bQuit = new JButton("Quit");
-				bQuit.setFont(new Font("Copperplate", Font.BOLD, 16));
-				bQuit.setBounds(300, 403, 300, 100);
-				pStart.add(bQuit);
-				btnNewButton = new JButton("Rules");
-				btnNewButton.setFont(new Font("Copperplate", Font.BOLD, 16));
-				btnNewButton.setBounds(300, 280, 300, 100);
-				pStart.add(btnNewButton);
-				String[] items = {"words.txt", "countries.txt", "computer.txt", "food.txt"};
-				JComboBox<String> comboBox = new JComboBox<>(items);
-				comboBox.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						JComboBox<String> combo = (JComboBox<String>) e.getSource();
-						String choice = (String)combo.getSelectedItem();
-						updateLabel(choice);
-					}
-				});
-				comboBox.setBounds(365, 246, 176, 27);
-				pStart.add(comboBox);
+
+		pStart = new JPanel();
+		pStart.setBackground(new Color(25, 25, 112));
+		pStart.setBounds(0, 0, 900, 600);
+		contentPane.add(pStart);
+		pStart.setLayout(null);
+		bStart = new JButton("Start");
+		bStart.setFont(new Font("Copperplate", Font.BOLD, 18));
+		bStart.setBackground(new Color(255, 255, 255));
+		bStart.setBounds(300, 147, 300, 100);
+		pStart.add(bStart);
+		lTitle = new JLabel("Hangman\n");
+		lTitle.setForeground(new Color(255, 255, 255));
+		lTitle.setBounds(175, 6, 565, 139);
+		pStart.add(lTitle);
+		lTitle.setHorizontalAlignment(SwingConstants.CENTER);
+		lTitle.setFont(new Font("Wawati SC", Font.BOLD | Font.ITALIC, 99));
+		bQuit = new JButton("Quit");
+		bQuit.setFont(new Font("Copperplate", Font.BOLD, 16));
+		bQuit.setBounds(300, 403, 300, 100);
+		pStart.add(bQuit);
+		btnNewButton = new JButton("Rules");
+		btnNewButton.setFont(new Font("Copperplate", Font.BOLD, 16));
+		btnNewButton.setBounds(300, 280, 300, 100);
+		pStart.add(btnNewButton);
+		String[] items = { "words.txt", "countries.txt", "computer.txt", "food.txt" , "school.txt" };
+		comboBox = new JComboBox(items);
+		comboBox.setBounds(365, 246, 176, 27);
+		pStart.add(comboBox);
 		pGame = new JPanel();
 		pGame.setBackground(new Color(0, 128, 128));
 		pGame.setEnabled(false);
@@ -239,10 +232,19 @@ public class UI extends JFrame {
 		makeButtons();
 
 	}
-	public void updateLabel(String c){
+
+	public void updateLabel(String c) {
 		filename = c;
 	}
+
 	public void actions() {
+		comboBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JComboBox<String> combo = (JComboBox<String>) e.getSource();
+				String choice = (String) combo.getSelectedItem();
+				updateLabel(choice);
+			}
+		});
 		bQuit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.exit(0);
@@ -291,7 +293,7 @@ public class UI extends JFrame {
 		progress.setText(h.getProgress());
 		bpanel.setVisible(true);
 		word.setText("");
-		for(JButton b: buttons){
+		for (JButton b : buttons) {
 			b.setForeground(Color.BLACK);
 		}
 		playagain.setVisible(false);

@@ -12,7 +12,6 @@ public class Dictionary {
 	
 	public Dictionary(String filename){
 		
-		@SuppressWarnings("resource")
 		Scanner f;
 		try {
 			f = new Scanner(new File(filename));
