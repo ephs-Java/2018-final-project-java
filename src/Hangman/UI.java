@@ -118,7 +118,7 @@ public class UI extends JFrame {
 					if (h.checkLetter(buttons[index].getText()))
 						buttons[index].setForeground(Color.GREEN);
 					else
-						buttons[index].setForeground(Color.RED);
+						buttons[index].setVisible(false);
 
 					progress.setText(h.getProgress());
 					hangingImage.setIcon(h.getImage());
@@ -321,6 +321,7 @@ public class UI extends JFrame {
 		word.setText("");
 		for (JButton b : buttons) {
 			b.setForeground(Color.BLACK);
+			b.setVisible(true);
 		}
 		playagain.setVisible(false);
 	}

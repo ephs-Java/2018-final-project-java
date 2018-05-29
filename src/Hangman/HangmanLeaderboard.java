@@ -34,7 +34,7 @@ public class HangmanLeaderboard {
 	 * Writes the file to disk to store permanently.
 	 */
 	public void writeFile(ArrayList<String> ranks) throws IOException {
-		File flead = new File("/Users/90304318/git/leaderboard2018-90304318/HangmanLeaderboard.txt");
+		File flead = new File("HangmanLeaderboard.txt");
 		FileOutputStream fos = new FileOutputStream(flead);
 
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
