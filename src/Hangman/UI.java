@@ -75,12 +75,11 @@ public class UI extends JFrame {
 	 * @throws IOException 
 	 */
 	public UI() throws IOException {
-
-		initContainers();
-		actions();
-		
 		this.name = "default";
 		this.numCorrect = 0;
+		leaderboard(name, numCorrect);
+		initContainers();
+		actions();
 	}
 	
 	/**
