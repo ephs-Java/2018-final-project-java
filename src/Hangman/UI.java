@@ -88,7 +88,7 @@ public class UI extends JFrame {
 	 */
 	public void leaderboard(String player, int solved) throws IOException {
 		HangmanLeaderboard hl = new HangmanLeaderboard(player, solved);
-		String fileName = "/Users/90304318/git/leaderboard2018-90304318/HangmanLeaderboard.txt";;
+		String fileName = "HangmanLeaderboard.txt";
 		//read existing file
 		ArrayList<String> lead = hl.readFile(fileName);
 		hl.addWordsSolved(lead);
@@ -96,7 +96,7 @@ public class UI extends JFrame {
 		hl.printArrayList(lead);
 	}
 
-	public void makeButtons() throws IOException {
+	public void makeButtons() {
 		// TODO Auto-generated method stub
 		int j = 65;
 
@@ -113,7 +113,6 @@ public class UI extends JFrame {
 
 		bpanel.setVisible(true);
 		for (int i = 0; i < buttons.length; i++) {
-
 			final int index = i;
 			buttons[i].addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -131,7 +130,12 @@ public class UI extends JFrame {
 					} else if (h.wordEquals()) {
 						bpanel.setVisible(false);
 						playagain.setVisible(true);
-						
+						try {
+							addLeaderBoard();
+						} catch (IOException e2) {
+							// TODO Auto-generated catch block
+							e2.printStackTrace();
+						}
 						try {
 							h.playSound("img/win.wav");
 						} catch (LineUnavailableException | UnsupportedAudioFileException | IOException e1) {
@@ -141,8 +145,7 @@ public class UI extends JFrame {
 					}
 				}
 			});
-			this.numCorrect++;
-			leaderboard(name, numCorrect);
+			
 		}
 	}
 
@@ -321,5 +324,9 @@ public class UI extends JFrame {
 			b.setForeground(Color.BLACK);
 		}
 		playagain.setVisible(false);
+	}
+	public void addLeaderBoard() throws IOException{
+		numCorrect++;
+		leaderboard(name, numCorrect);
 	}
 }
