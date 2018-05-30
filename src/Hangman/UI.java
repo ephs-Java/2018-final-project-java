@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 import javax.swing.JScrollPane;
@@ -75,11 +76,19 @@ public class UI extends JFrame {
 	 * @throws IOException 
 	 */
 	public UI() throws IOException {
+		int count = 0;
 		this.name = "default";
+		if (count == 0) { this.name = getName(); count++;}
 		this.numCorrect = 0;
 		leaderboard(name, numCorrect);
 		initContainers();
 		actions();
+	}
+	
+	public String getName() {
+		Scanner in = new Scanner(System.in);
+		System.out.print("What is your name?  ");
+		return in.nextLine();
 	}
 	
 	/**
@@ -98,7 +107,6 @@ public class UI extends JFrame {
 	public void makeButtons() {
 		// TODO Auto-generated method stub
 		int j = 65;
-
 		for (int i = 0; i < buttons.length; i++) {
 			char c = (char) j;
 			String letter = "" + c;
@@ -107,7 +115,6 @@ public class UI extends JFrame {
 
 			bpanel.add(buttons[i]);
 			j++;
-
 		}
 
 		bpanel.setVisible(true);
